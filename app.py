@@ -31,7 +31,13 @@ movies_list = movies['title'].values
 
 st.title('Movie Recommender System')
 
-similarity = pickle.load(open('similarity.pkl','rb'))
+if os.path.exists("similarity.pkl"):
+    similarity = pickle.load(open("similarity.pkl", "rb"))
+else:
+    cv = CountVectorizer(max_features=5000, stop_words='english')
+    vectors = cv.fit_transform(movies['tags']).toarray()
+    similarity = cosine_similarity(vectors)
+
 
 
 selected_movie_name = st.selectbox(
