@@ -2,6 +2,9 @@ import streamlit as st
 import pickle
 import pandas as pd
 import requests
+import os
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import CountVectorizer
 
 def fetch_poster(movie_id):
     response = requests.get("https://api.themoviedb.org/3/movie/{}?api_key=f8b2858e8359eff762d2221becf94df9&language=en-US".format(movie_id))
